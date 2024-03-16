@@ -1,53 +1,16 @@
-const { promisify } = require("util");
-const jwt = require("jsonwebtoken");
-const User = require("./../model/userModal");
+const Product = require("./../model/productModal");
 
 const fs = require("fs");
 
 const multer = require("multer");
 const uploadMiddleware = multer({ dest: "./uploads/" });
 
-// SIGN THE TOKEN
-const signToken = (id) => {
-    return jwt.sign(
-        { id },
-        "my-name-is-nilanchala-panda-who-stays-in-goregaon-mumbai",
-        {
-            expiresIn: "90d",
-        },
-    );
-};
-
-// CREATE THE TOKEN AND SEND -
-const createSendToken = (user, statusCode, res) => {
-    const token = signToken(user._id);
-
-    const cookieOptions = {
-        expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
-        httpOnly: true,
-    };
-
-    // cookie options
-    res.cookie("jwt", token, cookieOptions);
-
-    // Remove Password from the respone body :
-    user.password = undefined;
-
-    //5) Saving the imformation in the database :
-    res.status(statusCode).json({
-        message: "success",
-        token,
-        data: {
-            user,
-        },
-    });
-};
-
 // UPLOAD FILE -
 exports.uploadFile = uploadMiddleware.single("file");
 exports.signup = async (req, res, next) => {
     try {
         console.log("REQ FILE :", req.file);
+        const user = req.user;
 
         const { originalname, path } = req.file;
         const ext = originalname.split(".")[1];
@@ -66,27 +29,19 @@ exports.signup = async (req, res, next) => {
             file = newPath,
             role,
         } = req.body;
-        // 2) Check for existing user with same email address :
-        const alreadyExistUser = await User.findOne({ email });
-        if (alreadyExistUser) {
-            return next(new Error("Email is taken! Please login instead"));
-        }
 
         // 3) If above both checks are passed, then start the process of creating new user :
-        const user = await User.create({
+        const products = await Product.create({
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
             file: (req.body.file = newPath),
             eKYC: req.body.eKYC || "N/A",
             role: req.body.role,
+            user: req.user.id
         });
 
-        await user.save();
-
-        //4) Creating JWT token for the authorized user :
-        //5) Saving the imformation in the database :
-        createSendToken(user, 201, res);
+        await products.save();
     } catch (e) {
         console.log("ERROR : ", e);
     }
