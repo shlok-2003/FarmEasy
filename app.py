@@ -19,7 +19,7 @@ import json
 from flask import Flask, escape, flash, redirect, request, render_template, session, url_for, Markup
 import pickle
 import pandas as pd
-
+import requests
 import numpy as np
 from sklearn import datasets
 from flask_mongoengine import MongoEngine
@@ -28,17 +28,13 @@ app = Flask(__name__)
 
 
 # Mongodb Database Connection Use localHost
-name = 'deepak'
+name = 'shreyansh'
 username = urllib.parse.quote_plus('name')
-pass1='deepakprasad'
+pass1='shreyansh'
 password= urllib.parse.quote_plus('pass1')
 app.secret_key = 'aifarming'
 app.config['MONGODB_SETTINGS'] = {
-    
-# database connection name
 
-,
-    
 }
 db = MongoEngine()
 db1 = MongoEngine()
@@ -261,6 +257,7 @@ def predict():
         PH = int(request.form['PH'])
         if weather_fetch(city) != None:
             temperature, humidity = weather_fetch(city)
+            temperature = 30
 
         prediction = model.predict(
             np.array([[Nitrogen, Potassium, Phosphorous, temperature, humidity, PH, Rainfall]]))
