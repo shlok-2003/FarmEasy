@@ -21,7 +21,7 @@ const ProductSchema = new mongoose.Schema(
         prodQuantity: {
             type: String,
         },
-        farmer: {
+        farmerID: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
             required: true,

@@ -22,12 +22,13 @@ exports.signup = async (req, res, next) => {
 
         // 1) Check if the user has all the fields filled :
         const {
-            name,
-            email,
-            password,
-            eKYC,
-            file = newPath,
-            role,
+            prodName,
+            prodPrice,
+            prodDescription,
+            prodQuantity,
+            prodImage = newPath,
+            farmerID,
+            category
         } = req.body;
 
         // 3) If above both checks are passed, then start the process of creating new user :
