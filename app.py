@@ -257,7 +257,6 @@ def predict():
         PH = int(request.form['PH'])
         if weather_fetch(city) != None:
             temperature, humidity = weather_fetch(city)
-            temperature = 30
 
         prediction = model.predict(
             np.array([[Nitrogen, Potassium, Phosphorous, temperature, humidity, PH, Rainfall]]))
