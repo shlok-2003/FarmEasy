@@ -8,7 +8,7 @@ const xss = require("xss-clean");
 const dotenv = require("dotenv");
 
 // MANUAL FILE IMPORTS :
-// const userRoutes = require("./routes/userRoutes");
+const userRoutes = require("./routes/userRoutes");
 // const songRoutes = require("./routes/songRoutes");
 
 // INSTANCE OF EXPRESS :
@@ -54,7 +54,7 @@ app.get("/admin", (req, res) => {
 // });
 
 // ROUTE HANDLERS ==> MOUNTING THE ROUTER :
-// app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/users", userRoutes);
 // app.use("/api/v1/users", songRoutes);
 
 // ANY UNHANDLED ROUTE :
