@@ -29,7 +29,7 @@
     
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src="../static/images/chip.png" class="logo-img "><span class="cname">AI Farming</span></a>
+      <a class="navbar-brand" href="#"><img src="../static/images/Logo_main.jpg" class="logo-img "><span class="cname">FarmEasy</span></a>
       <button class="navbar-toggler" type="button"  id="btn5">
         <span class="navbar-toggler-icon" onclick="togglehide()" ></span>
         
@@ -38,34 +38,12 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/" style="    font-size: 20px;">Home</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="/disease"  style="    font-size: 20px;">Care</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/sell"  style="    font-size: 20px;">Market</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="#"  style="    font-size: 20px; text-align: center;">Translate 
                 <div id="google_translate_element"></div>
             </a>
           </li>
-
-
-          <li class="nav-item">
-            <a class="nav-link" href="/news" style="    font-size: 20px;">News</a>
-          </li>
         </ul>
-        <div class="d-flex">
-        {% if session.logged_in  %}
-         <a href='/logout'> <button class="btn btn-style" type="submit" >Logout</button></a>
-        {% else %}
-        <a href='/login'> <button class="btn btn-style" type="submit" >Login</button></a>
-        {% endif %}
-        <a href='/signup'><button class="btn btn-style btn-style-border" type="submit" >Signup</button></a>
-          </form>
-        </div>
       </div>
 
   </nav>
