@@ -49,9 +49,6 @@ export default function Feed() {
             </Section>
             <Section className="flex flex-col justify-center items-center">
                 <Box>
-                    <Typography variant="h3" className="text-left text-black">
-                        Hello
-                    </Typography>
                     <Box className="flex flex-col self-center gap-10">
                         {product.map((item, index) => (
                             <Card
@@ -60,6 +57,7 @@ export default function Feed() {
                             >
                                 <CardHeader>
                                     <img src={item.img} alt="post" />
+
                                 </CardHeader>
                                 <CardContent>
                                     <CardTitle>{item.name}</CardTitle>
