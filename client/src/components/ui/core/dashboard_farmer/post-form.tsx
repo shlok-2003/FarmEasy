@@ -10,6 +10,7 @@ import {
 import { PRODUCT_CATEGORY } from "@/data/product_category";
 
 import { productApi } from "@/api/index";
+import { toast } from "sonner";
 
 function Form() {
     const [formData, setFormData] = useState({
@@ -59,7 +60,14 @@ function Form() {
 
         try {
             await fetch(productApi.ADD_PRODUCT, requestOptions);
-            window.location.reload();
+
+            toast.success("Product added successfully", {
+                position: "bottom-right",
+            });
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
         } catch (error) {
             console.error("Error occurred:", error);
         }
@@ -185,31 +193,25 @@ function Form() {
 }
 
 function Post() {
-    const [isOpen, setIsOpen] = useState(false);
-
     return (
         <Section className="flex flex-col w-full space-y-6">
             <Box className="flex self-stretch items-end justify-between mx-5 px-5 pb-5 border-b border-black">
                 <Box className="text-[1.8rem] font-bold">
                     Get the best fertilizers direct from Indian Government
                 </Box>
-                <Dialog isOpen={isOpen} onDismiss={() => setIsOpen(false)}>
+                <Dialog>
                     <DialogTrigger asChild>
                         <Button
                             variant="outline"
                             className="bg-custom-border text-xl py-6 rounded-md hover:border-green-600 hover:border-2 mt-5 transition-all duration-300 font-bold"
-                            onClick={() => setIsOpen(true)}
                         >
                             Add Products
                         </Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">
-                        <Form onClose={() => setIsOpen(false)} />
+                        <Form />
                     </DialogContent>
                 </Dialog>
-            </Box>
-            <Box className="flex justify-center items-center">
-                <img src="/assets/Farming.png" alt="Farming" width={700} />
             </Box>
         </Section>
     );
