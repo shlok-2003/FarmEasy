@@ -1,12 +1,14 @@
 
 const app = require("./app");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
-const DB = "mongodb+srv://nilanchalpanda2003:ACEHACKS@cluster0.ruxxtrs.mongodb.net/ACEHACKS?retryWrites=true&w=majority&appName=Cluster0";
+dotenv.config();
+
+const DB = process.env.DB_URI;
 
 mongoose.connect(DB).then((con) => {
   console.log("DB CONNECTION DONE :)");
-  
 });
 
 // SERVER START :
